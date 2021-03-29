@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 public class UserAccount extends User {
 
-    private Account account;
+    private final Account account;
 
     public UserAccount(Account account) {
         super(account.getNickname(), account.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_USER")));
