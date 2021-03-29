@@ -91,7 +91,10 @@ public class AccountService implements UserDetailsService {
         account.setBio(profile.getBio());
         account.setProfileImage(profile.getProfileImage());
         accountRepository.save(account);
+    }
 
-        // TODO: 2021-03-29 문제가 하나 더 남았음
+    public void updatePassword(Account account, String newPassword) {
+        account.setPassword(passwordEncoder.encode(newPassword));
+        accountRepository.save(account);    // merge
     }
 }
