@@ -1,5 +1,6 @@
-package com.example.studyhyuck.settings;
+package com.example.studyhyuck.settings.validator;
 
+import com.example.studyhyuck.settings.form.PasswordForm;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

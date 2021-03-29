@@ -1,7 +1,7 @@
 package com.example.studyhyuck.account;
 
 import com.example.studyhyuck.domain.Account;
-import com.example.studyhyuck.settings.Notifications;
+import com.example.studyhyuck.settings.form.Notifications;
 import com.example.studyhyuck.settings.Profile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -100,5 +100,11 @@ public class AccountService implements UserDetailsService {
     public void updateNotifications(Account account, Notifications notifications) {
         modelMapper.map(notifications, account);
         accountRepository.save(account);    // merge
+    }
+
+    public void updateNickname(Account account, String nickname) {
+        account.setNickname(nickname);
+        accountRepository.save(account);
+        login(account);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.studyhyuck.settings;
+package com.example.studyhyuck.settings.form;
 
 import lombok.Data;
 
