@@ -1,6 +1,7 @@
 package com.example.studyhyuck.account;
 
 import com.example.studyhyuck.domain.Account;
+import com.example.studyhyuck.settings.Profile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -81,5 +82,16 @@ public class AccountService implements UserDetailsService {
     public void completeSignUp(Account account) {
         account.completeSignUp();
         login(account);
+    }
+
+    public void updateProfile(Account account, Profile profile) {
+        account.setUrl(profile.getUrl());
+        account.setOccupation(profile.getOccupation());
+        account.setLocation(profile.getLocation());
+        account.setBio(profile.getBio());
+        // TODO: 2021-03-29 프로필 이미지 
+        accountRepository.save(account);
+
+        // TODO: 2021-03-29 문제가 하나 더 남았음
     }
 }
