@@ -24,6 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());  // Static Resource 들은 스프링 시큐리티 적용하지 않도록
+                .mvcMatchers("/node_modules/**")
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());  // Static Resource 아래 흔히 사용하는 위치들은 스프링 시큐리티 적용하지 않도록 (/css/**, /js/** 등)
+
     }
 }
