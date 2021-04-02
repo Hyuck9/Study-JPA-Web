@@ -51,6 +51,7 @@ public class AccountService implements UserDetailsService {
     public void sendSignUpConfirmEmail(Account newAccount) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(newAccount.getEmail());
+        mailMessage.setFrom("lhg1304@naver.com");
         mailMessage.setSubject("StudyHyuck, 회원 가입 인증");
         mailMessage.setText("/check-email-token?token=" + newAccount.getEmailCheckToken() + "&email=" + newAccount.getEmail());
         javaMailSender.send(mailMessage);
