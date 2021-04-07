@@ -54,4 +54,7 @@ public class Study {
 
     private boolean useBanner;
 
+    public void addManager(Account account) {
+        this.managers.add(account);
+    }
 }
