@@ -9,6 +9,7 @@ import com.example.studyhyuck.settings.form.*;
 import com.example.studyhyuck.settings.validator.NicknameValidator;
 import com.example.studyhyuck.settings.validator.PasswordFormValidator;
 import com.example.studyhyuck.tag.TagRepository;
+import com.example.studyhyuck.tag.TagService;
 import com.example.studyhyuck.zone.ZoneRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +46,7 @@ public class SettingsController {
     static final String ZONES = "/zones";
 
     private final AccountService accountService;
+    private final TagService tagService;
     private final ModelMapper modelMapper;
     private final NicknameValidator nicknameValidator;
     private final TagRepository tagRepository;
@@ -136,12 +138,7 @@ public class SettingsController {
 
     @PostMapping(TAGS + "/add")
     public @ResponseBody ResponseEntity addTag(@CurrentAccount Account account, @RequestBody TagForm tagForm) {
-        String title = tagForm.getTagTitle();
-        Tag tag = tagRepository.findByTitle(title);
-        if (tag == null) {
-            tag = tagRepository.save(Tag.builder().title(tagForm.getTagTitle()).build());
-        }
-
+        Tag tag = tagService.findOrCreateNew(tagForm.getTagTitle());
         accountService.addTag(account, tag);
         return ResponseEntity.ok().build();
     }
