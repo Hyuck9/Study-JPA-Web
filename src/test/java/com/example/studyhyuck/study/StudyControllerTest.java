@@ -25,8 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class StudyControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
     @Autowired StudyService studyService;
     @Autowired StudyRepository studyRepository;
     @Autowired AccountRepository accountRepository;
