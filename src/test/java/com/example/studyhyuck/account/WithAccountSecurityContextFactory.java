@@ -1,7 +1,5 @@
-package com.example.studyhyuck;
+package com.example.studyhyuck.account;
 
-import com.example.studyhyuck.account.AccountService;
-import com.example.studyhyuck.account.SignUpForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

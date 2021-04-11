@@ -1,4 +1,4 @@
-package com.example.studyhyuck;
+package com.example.studyhyuck.account;
 
 import org.springframework.security.test.context.support.WithSecurityContext;
 

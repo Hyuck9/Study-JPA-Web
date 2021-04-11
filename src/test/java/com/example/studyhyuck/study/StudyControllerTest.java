@@ -1,6 +1,7 @@
 package com.example.studyhyuck.study;
 
-import com.example.studyhyuck.WithAccount;
+import com.example.studyhyuck.account.AccountFactory;
+import com.example.studyhyuck.account.WithAccount;
 import com.example.studyhyuck.account.AccountRepository;
 import com.example.studyhyuck.domain.Account;
 import com.example.studyhyuck.domain.Study;
@@ -29,6 +30,8 @@ class StudyControllerTest {
     @Autowired StudyService studyService;
     @Autowired StudyRepository studyRepository;
     @Autowired AccountRepository accountRepository;
+    @Autowired AccountFactory accountFactory;
+    @Autowired StudyFactory studyFactory;
 
     @Test
     @WithAccount("lhg1304")
@@ -90,12 +93,46 @@ class StudyControllerTest {
         study.setShortDescription("short description");
         study.setFullDescription("<p>full description</p>");
 
-        Account keesun = accountRepository.findByNickname("keesun");
-        studyService.createNewStudy(study, keesun);
+        Account lhg1304 = accountRepository.findByNickname("lhg1304");
+        studyService.createNewStudy(study, lhg1304);
 
         mockMvc.perform(get("/study/test-path"))
                 .andExpect(view().name("study/view"))
                 .andExpect(model().attributeExists("account"))
                 .andExpect(model().attributeExists("study"));
     }
+
+
+    @Test
+    @WithAccount("lhg1304")
+    @DisplayName("스터디 가입")
+    void joinStudy() throws Exception {
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Study study = studyFactory.createStudy("test-study", whiteship);
+
+        mockMvc.perform(get("/study/" + study.getPath() + "/join"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/study/" + study.getPath() + "/members"));
+
+        Account lhg1304 = accountRepository.findByNickname("lhg1304");
+        assertTrue(study.getMembers().contains(lhg1304));
+    }
+
+    @Test
+    @WithAccount("lhg1304")
+    @DisplayName("스터디 탈퇴")
+    void leaveStudy() throws Exception {
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Study study = studyFactory.createStudy("test-study", whiteship);
+        Account lhg1304 = accountRepository.findByNickname("lhg1304");
+        studyService.addMember(study, lhg1304);
+
+        mockMvc.perform(get("/study/" + study.getPath() + "/leave"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/study/" + study.getPath() + "/members"));
+
+        assertFalse(study.getMembers().contains(lhg1304));
+    }
+
+
 }

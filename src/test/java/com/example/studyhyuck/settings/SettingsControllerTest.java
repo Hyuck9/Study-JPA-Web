@@ -1,6 +1,6 @@
 package com.example.studyhyuck.settings;
 
-import com.example.studyhyuck.WithAccount;
+import com.example.studyhyuck.account.WithAccount;
 import com.example.studyhyuck.account.AccountRepository;
 import com.example.studyhyuck.account.AccountService;
 import com.example.studyhyuck.account.SignUpForm;
