@@ -1,6 +1,6 @@
 package com.example.studyhyuck.event.form;
 
-import com.example.studyhyuck.domain.EventType;
+import com.example.studyhyuck.event.EventType;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
