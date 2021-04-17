@@ -1,4 +1,4 @@
-package com.example.studyhyuck.event;
+package com.example.studyhyuck.event.form;
 
 import com.example.studyhyuck.domain.EventType;
 import lombok.Data;
